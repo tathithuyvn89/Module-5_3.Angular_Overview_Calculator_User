@@ -5,16 +5,31 @@ import { AppComponent } from './app.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { MenuComponent } from './core/menu/menu.component';
 import { UserListComponent } from './users/user-list/user-list.component';
+import { InputSearchComponent } from './core/input-search/input-search.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AppRoutingModule } from './app-routing.module';
+import { GroupListComponent } from './groups/group-list/group-list.component';
+import {RouterModule} from "@angular/router";
+import { UserAddComponent } from './users/user-add/user-add.component';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalculatorComponent,
     MenuComponent,
-    UserListComponent
+    UserListComponent,
+    InputSearchComponent,
+    GroupListComponent,
+    UserAddComponent,
+    UserEditComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

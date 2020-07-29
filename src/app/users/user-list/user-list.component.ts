@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {IUser} from "../IUser";
 import {readBaseClass} from "@angular/compiler-cli/src/ngtsc/annotations/src/util";
+import {IGroup} from "../../groups/igroup";
+import {GroupService} from "../../groups/group.service";
+import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-user-list',
@@ -8,44 +11,21 @@ import {readBaseClass} from "@angular/compiler-cli/src/ngtsc/annotations/src/uti
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+  textInput='Day la giu leiu cua cha'
   title_page: 'User';
   users: IUser[] ;
-  // userFilter: IUser[];
-  // userDelete: IUser[];
-
-  constructor() {
+  groups: IGroup[];
+  constructor(private groupService: GroupService, private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.users = this.setUserList();
-    // this.userFilter = this.users;
-    // this.userDelete = this.users;
-  }
-
-  setUserList(){
-    let users = [
-      {
-        id: 1,
-        name: 'Thuy',
-        email: 'Thuy@gmail.com'
-      },
-      {
-        id: 2,
-        name: 'Hoang',
-        email: 'Hoang@gmail.com'
-      },
-      {
-        id: 3,
-        name: 'Thanh',
-        email: 'Thanh@gmail.com'
-      }
-    ];
-    return users;
+    this.users = this.userService.getAll();
+    this.groups = this.groupService.getAll();
   }
 
   search(event) {
-    const keyword = event.target.value;
-    this.users = (keyword) ? this.filterByKeyword(keyword) : this.setUserList();
+    const keyword = event;
+    this.users = (keyword) ? this.filterByKeyword(keyword) : this.userService.getAll();
   }
 
   private filterByKeyword(keyword) {
@@ -55,13 +35,11 @@ export class UserListComponent implements OnInit {
     })
   }
 
-  deleteUser(id: number) {
-    let userDeleted = [];
-    this.users.map(user => {
-      if (user.id != id) {
-        userDeleted.push(user);
-      }
-    });
-    this.users = userDeleted;
+  deleteUser(id: number)  {
+    this.users= this.userService.deleteUser(id);
+  }
+
+  editUser(id: number) {
+
   }
 }

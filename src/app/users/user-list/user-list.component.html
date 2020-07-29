@@ -6,19 +6,21 @@
         {{ title_page }}
       </div>
       <div class="col-md-8">
-        <input type="text" (keyup)="search($event)">
+        <app-input-search (keyword)="search($event)"  [message]="textInput"></app-input-search>
       </div>
     </div>
 
 
   </div>
   <div class="card-body">
+    <button class="btn btn-primary" [routerLink]="['add']">Create new user</button>
     <table class="table">
       <thead class="thead-light">
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
+        <th scope="col">Group</th>
         <th scope="col">Handle</th>
       </tr>
       </thead>
@@ -27,8 +29,12 @@
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ user.name }}</td>
         <td>{{ user.email}}</td>
+        <ng-container *ngFor="let group of groups">
+          <td *ngIf="group.id===user.group_id">{{group.name}}</td>
+        </ng-container>
         <td>
           <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
+          <button class="btn btn-primary" [routerLink]="[user.id+'/edit']">Edit</button>
         </td>
       </tr>
 
