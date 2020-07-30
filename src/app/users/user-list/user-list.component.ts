@@ -13,6 +13,8 @@ import {UserService} from "../user.service";
 export class UserListComponent implements OnInit {
   textInput='Day la giu leiu cua cha'
   title_page: 'User';
+  totalRec : number;
+  page: number = 1;
   users: IUser[] ;
   groups: IGroup[];
   constructor(private groupService: GroupService, private userService: UserService) {
@@ -26,6 +28,7 @@ export class UserListComponent implements OnInit {
   search(event) {
     const keyword = event;
     this.users = (keyword) ? this.filterByKeyword(keyword) : this.userService.getAll();
+    this.totalRec=4;
   }
 
   private filterByKeyword(keyword) {

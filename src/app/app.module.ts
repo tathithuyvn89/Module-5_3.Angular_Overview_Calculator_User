@@ -12,6 +12,7 @@ import { GroupListComponent } from './groups/group-list/group-list.component';
 import {RouterModule} from "@angular/router";
 import { UserAddComponent } from './users/user-add/user-add.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
     FormsModule,
     AppRoutingModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

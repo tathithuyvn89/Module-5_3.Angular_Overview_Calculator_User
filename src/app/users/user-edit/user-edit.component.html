@@ -1,7 +1,7 @@
-<form [formGroup]="addUserForm" (ngSubmit)="submit()">
+<form [formGroup]="editUserForm" (ngSubmit)="submitEdit()">
   <div class="form-group">
     <label>Id</label>
-    <input type="number" class="form-control" formControlName="id" placeholder="Enter Id">
+    <input  disabled type="number" class="form-control" formControlName="id" placeholder="Enter Id">
 
   </div>
   <div class="form-group">
@@ -23,6 +23,6 @@
       </ng-container>
     </select>
   </div>
-  <button type="submit" [disabled]="addUserForm.invalid" class="btn btn-primary">Submit</button>
+  <button type="submit" [disabled]="editUserForm.invalid" class="btn btn-primary">Submit</button>
 </form>
 

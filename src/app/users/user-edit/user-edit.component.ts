@@ -13,7 +13,7 @@ import get = Reflect.get;
   styleUrls: ['./user-edit.component.scss']
 })
 export class UserEditComponent implements OnInit {
-addUserForm : FormGroup;
+editUserForm : FormGroup;
 user: IUser;
 groups: IGroup[];
   constructor( private fb: FormBuilder,
@@ -26,7 +26,7 @@ groups: IGroup[];
     this.groups= this.groupService.getAll();
     const id = Number(this.route.snapshot.params['id']);
     this.user= this.userService.findUser(id);
-    this.addUserForm = this.fb.group({
+    this.editUserForm = this.fb.group({
       id : [this.user.id,Validators.required],
       name: [this.user.name,Validators.required],
       email: [this.user.email,Validators.email],
@@ -35,12 +35,11 @@ groups: IGroup[];
 
 
   }
-
-  submit() {
-    let data = this.addUserForm.value;
-    data.group_id = +data.group_id;
-    this.userService.deleteUser(data.id);
-    this.userService.addUser(data);
+  submitEdit() {
+    let newdata = this.editUserForm.value;
+    newdata.group_id = +newdata.group_id;
+    let id = newdata.id;
+    this.userService.editUser(id,newdata);
     this.router.navigate(['users']);
   }
 }

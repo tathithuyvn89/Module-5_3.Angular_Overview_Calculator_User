@@ -25,7 +25,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let user of users; let i = index">
+      <tr *ngFor="let user of users | paginate: { id: 'listing_pagination',
+                                                      itemsPerPage: 5,
+                                                      currentPage: page,
+                                                      totalItems: totalRec }; let i = index">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ user.name }}</td>
         <td>{{ user.email}}</td>
@@ -33,12 +36,15 @@
           <td *ngIf="group.id===user.group_id">{{group.name}}</td>
         </ng-container>
         <td>
-          <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
+          <button class="btn btn-danger mr-2" (click)="deleteUser(user.id)">Delete</button>
           <button class="btn btn-primary" [routerLink]="[user.id+'/edit']">Edit</button>
         </td>
       </tr>
 
       </tbody>
     </table>
+  </div>
+  <div>
+    <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
   </div>
 </div>
